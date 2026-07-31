@@ -22,17 +22,19 @@ likeness, in any format.
 
 ## Showcase
 
-An arbitrary real clip becomes a clean, format-native talking-head avatar — same person, restaged
-and animated to a new script:
+We took a **real webinar host** — who appears only as a small webcam tab in a 72-minute recording —
+and recreated her as a full talking-head avatar delivering a fresh script:
 
-| 1 · Real input frame | 2 · AI studio reference | 3 · Generated output |
+| 1 · Real webinar frame | 2 · AI studio reference | 3 · Generated avatar |
 |:---:|:---:|:---:|
-| ![Raw webcam input frame](assets/input.png) | ![Reimagined clean studio reference](assets/reference.png) | ![Generated talking-head output](assets/output.png) |
-| messy webcam grab — dark, RGB-lit | nano-banana re-stages it clean (**same person**) | Wan2.2-S2V animates it to the script |
+| ![Host's small webcam tab from the source webinar](assets/input.png) | ![Reimagined clean studio portrait](assets/reference.png) | ![Generated talking-head avatar](assets/output.png) |
+| a small, soft webcam tab | nano-banana re-stages it into a clean studio portrait — **same person** | Wan2.2-S2V animates it, lip-synced to the script |
 
-**Vertical reels too** — same host, 9:16, lip-synced to the generated voice:
+**▶ Watch it (with audio)** — click to play the ~26-second generated clip:
 
-![9:16 reel output, animated](assets/reel.gif)
+[![Play the generated avatar clip — with audio](assets/output.png)](assets/helene-demo.mp4)
+
+Outputs render in **any aspect ratio** you ask for — 16:9, 9:16 (vertical / reels), or 1:1.
 
 ## Layout
 
