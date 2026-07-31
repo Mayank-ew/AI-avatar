@@ -34,7 +34,9 @@ and recreated her as a full talking-head avatar delivering a fresh script:
 
 [![Play the generated avatar clip — with audio](assets/output.png)](assets/helene-demo.mp4)
 
-Outputs render in **any aspect ratio** you ask for — 16:9, 9:16 (vertical / reels), or 1:1.
+Outputs render in **any aspect ratio** — 16:9, 9:16 (vertical / reels), or 1:1. Same host, **9:16** (click to play, with audio):
+
+<a href="assets/helene-vertical.mp4"><img src="assets/output-vertical.png" width="280" alt="Play the 9:16 vertical generated clip — with audio"></a>
 
 ## Layout
 
