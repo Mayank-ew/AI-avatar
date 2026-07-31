@@ -18,6 +18,10 @@
 *.webp
 *.gif
 
+# ...except the curated, downsized showcase assets referenced by the README.
+!assets/
+!assets/**
+
 # Python
 __pycache__/
 *.pyc

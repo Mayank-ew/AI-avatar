@@ -20,6 +20,20 @@ likeness, in any format.
   script, synthesizes speech (ElevenLabs *or* Fish Audio), animates the reference with
   Wan2.2-S2V, and returns a finished MP4.
 
+## Showcase
+
+An arbitrary real clip becomes a clean, format-native talking-head avatar — same person, restaged
+and animated to a new script:
+
+| 1 · Real input frame | 2 · AI studio reference | 3 · Generated output |
+|:---:|:---:|:---:|
+| ![Raw webcam input frame](assets/input.png) | ![Reimagined clean studio reference](assets/reference.png) | ![Generated talking-head output](assets/output.png) |
+| messy webcam grab — dark, RGB-lit | nano-banana re-stages it clean (**same person**) | Wan2.2-S2V animates it to the script |
+
+**Vertical reels too** — same host, 9:16, lip-synced to the generated voice:
+
+![9:16 reel output, animated](assets/reel.gif)
+
 ## Layout
 
 | File | Role |
