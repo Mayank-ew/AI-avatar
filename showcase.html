@@ -1,0 +1,317 @@
+<style>
+  :root{
+    --bg:#f5f6f8; --surface:#ffffff; --surface-2:#eef1f5; --border:#d9dee6;
+    --text:#121722; --muted:#5a6675; --faint:#8a94a3;
+    --accent:#0f8f80; --accent-soft:#0f8f8022; --amber:#b9741a; --amber-soft:#b9741a1a;
+    --ok:#1f9d57; --warn:#b98514; --crit:#c8483f;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --maxw:960px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0a0d13; --surface:#111825; --surface-2:#151d2b; --border:#232e40;
+      --text:#e7ecf3; --muted:#93a0b3; --faint:#5f6d80;
+      --accent:#35d0bf; --accent-soft:#35d0bf1f; --amber:#f0a94b; --amber-soft:#f0a94b1a;
+      --ok:#4bd07a; --warn:#e0b341; --crit:#f0685f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0a0d13; --surface:#111825; --surface-2:#151d2b; --border:#232e40;
+    --text:#e7ecf3; --muted:#93a0b3; --faint:#5f6d80;
+    --accent:#35d0bf; --accent-soft:#35d0bf1f; --amber:#f0a94b; --amber-soft:#f0a94b1a;
+    --ok:#4bd07a; --warn:#e0b341; --crit:#f0685f;
+  }
+  :root[data-theme="light"]{
+    --bg:#f5f6f8; --surface:#ffffff; --surface-2:#eef1f5; --border:#d9dee6;
+    --text:#121722; --muted:#5a6675; --faint:#8a94a3;
+    --accent:#0f8f80; --accent-soft:#0f8f8022; --amber:#b9741a; --amber-soft:#b9741a1a;
+    --ok:#1f9d57; --warn:#b98514; --crit:#c8483f;
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:44px 0;border-top:1px solid var(--border);}
+  section:first-of-type{border-top:0;}
+
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 14px;}
+  h1{font-size:clamp(2.1rem,5.2vw,3.3rem);line-height:1.04;letter-spacing:-.025em;font-weight:750;
+    margin:0 0 16px;text-wrap:balance;}
+  h2{font-size:1.4rem;letter-spacing:-.015em;font-weight:700;margin:0 0 6px;}
+  .lede{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--muted);max-width:60ch;margin:0;
+    text-wrap:balance;}
+  .sub{color:var(--muted);margin:0 0 26px;max-width:64ch;}
+  p{margin:0 0 14px;}
+
+  /* ---- hero ---- */
+  header{padding:64px 0 40px;position:relative;overflow:hidden;}
+  #wave{position:absolute;inset:auto 0 0 0;width:100%;height:120px;opacity:.5;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
+  .hero-inner{position:relative;z-index:1;}
+
+  /* ---- metric tiles ---- */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px;}
+  .metric{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .metric .n{font-family:var(--mono);font-size:1.5rem;font-weight:600;font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em;color:var(--text);}
+  .metric .n span{color:var(--faint);font-size:.9rem;}
+  .metric .k{font-size:.78rem;color:var(--muted);margin-top:4px;}
+
+  /* ---- pipeline ---- */
+  .lane{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:18px 18px 20px;margin-bottom:16px;}
+  .lane-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+  .lane-head .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted);}
+  .lane-head .tag.async{color:var(--amber);border-color:var(--amber);background:var(--amber-soft);}
+  .lane-head h3{margin:0;font-size:1.06rem;font-weight:680;}
+  .lane-head .when{color:var(--faint);font-size:.85rem;}
+  .flow{display:flex;gap:0;align-items:stretch;overflow-x:auto;padding-bottom:6px;}
+  .node{flex:1 0 132px;min-width:132px;background:var(--surface-2);border:1px solid var(--border);
+    border-radius:10px;padding:11px 12px;position:relative;}
+  .node + .node{margin-left:26px;}
+  .node + .node::before{content:"";position:absolute;left:-26px;top:50%;width:26px;height:2px;
+    background:linear-gradient(90deg,var(--border),var(--accent));}
+  .node + .node::after{content:"";position:absolute;left:-9px;top:50%;transform:translateY(-50%);
+    width:0;height:0;border-left:7px solid var(--accent);border-top:5px solid transparent;
+    border-bottom:5px solid transparent;}
+  .node .s{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--faint);}
+  .node .t{font-weight:640;font-size:.92rem;margin:3px 0 2px;letter-spacing:-.01em;}
+  .node .m{font-size:.76rem;color:var(--muted);line-height:1.4;}
+  .node.hot{border-color:var(--amber);box-shadow:inset 0 0 0 1px var(--amber-soft);}
+  .node.hot .s{color:var(--amber);}
+  .async-note{font-size:.82rem;color:var(--muted);margin-top:14px;padding-left:12px;
+    border-left:2px solid var(--amber);}
+  .async-note code{font-family:var(--mono);color:var(--text);background:var(--surface-2);
+    padding:1px 5px;border-radius:4px;font-size:.85em;}
+
+  /* ---- model table ---- */
+  .tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;min-width:560px;}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+  th{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;}
+  tbody tr:last-child td{border-bottom:0;}
+  td.role{font-weight:640;white-space:nowrap;}
+  td.model{font-family:var(--mono);font-size:.86rem;}
+  .chip{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:6px;vertical-align:middle;}
+  .chip.pick{color:var(--amber);border:1px solid var(--amber);background:var(--amber-soft);}
+  tr.pick td{background:var(--amber-soft);}
+
+  /* ---- rejected log ---- */
+  .rej{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .rcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 16px;
+    border-left:3px solid var(--crit);}
+  .rcard h4{margin:0 0 3px;font-size:.98rem;font-weight:660;}
+  .rcard .why{font-size:.86rem;color:var(--muted);margin:0;}
+  .rcard .verdict{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--crit);display:block;margin-bottom:6px;}
+
+  /* ---- decisions ---- */
+  .dec{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .dcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 16px;}
+  .dcard h4{margin:0 0 4px;font-size:.98rem;font-weight:660;display:flex;align-items:center;gap:8px;}
+  .dcard h4::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent);flex:none;}
+  .dcard p{margin:0;font-size:.86rem;color:var(--muted);}
+
+  /* ---- infra strip ---- */
+  .infra{display:flex;flex-wrap:wrap;gap:10px;}
+  .ichip{font-size:.82rem;padding:7px 12px;border-radius:999px;background:var(--surface);
+    border:1px solid var(--border);color:var(--muted);}
+  .ichip b{color:var(--text);font-weight:620;}
+
+  footer{padding:32px 0 48px;border-top:1px solid var(--border);color:var(--faint);font-size:.82rem;}
+  .k-accent{color:var(--accent);} .k-amber{color:var(--amber);}
+
+  @media (max-width:720px){
+    .metrics{grid-template-columns:repeat(2,1fr);}
+    .rej,.dec{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+
+<header>
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">EasyWebinar · Internal · Feature Deep-Dive</p>
+    <h1>AI Avatar Generation</h1>
+    <p class="lede">Onboard a host <span class="k-accent">once</span> — then turn any script into a
+      talking-head video in <span class="k-accent">their voice</span> and
+      <span class="k-accent">their face</span>, in any format, fully serverless.</p>
+
+    <div class="metrics">
+      <div class="metric"><div class="n">~4<span> min</span></div><div class="k">Render, 30s clip (warm)</div></div>
+      <div class="metric"><div class="n">~2.5<span> min</span></div><div class="k">Cold start (H100)</div></div>
+      <div class="metric"><div class="n">4<span>×</span></div><div class="k">Faster via distillation</div></div>
+      <div class="metric"><div class="n">480p<span> · any AR</span></div><div class="k">16:9 · 9:16 · 1:1</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap">
+  <p class="eyebrow">How it works</p>
+  <h2>Two flows: onboard once, generate forever</h2>
+  <p class="sub">The expensive, human-specific work happens a single time at onboarding. Every
+    subsequent video is driven by nothing but a <code>host_id</code> + a script.</p>
+
+  <div class="lane">
+    <div class="lane-head">
+      <span class="tag">Flow 1</span>
+      <h3>Onboarding</h3>
+      <span class="when">— once per host, ~1–2 min</span>
+    </div>
+    <div class="flow">
+      <div class="node"><div class="s">Input</div><div class="t">Upload clip</div><div class="m">Short video, or a URL we fetch server-side</div></div>
+      <div class="node"><div class="s">Voice</div><div class="t">Clone voice</div><div class="m">ElevenLabs Instant Voice Clone</div></div>
+      <div class="node"><div class="s">Frame</div><div class="t">Pick best frame</div><div class="m">InsightFace — frontal, eyes-open, well-lit</div></div>
+      <div class="node"><div class="s">Reference</div><div class="t">Studio portrait</div><div class="m">nano-banana re-stages one frame into a clean studio shot</div></div>
+      <div class="node"><div class="s">Store</div><div class="t">Save profile</div><div class="m">voice_id + reference → modal.Dict</div></div>
+    </div>
+  </div>
+
+  <div class="lane">
+    <div class="lane-head">
+      <span class="tag async">Flow 2 · async</span>
+      <h3>Generation</h3>
+      <span class="when">— per request</span>
+    </div>
+    <div class="flow">
+      <div class="node"><div class="s">Stage 0</div><div class="t">Audio director</div><div class="m">Groq LLM adds expressive tags (ElevenLabs only)</div></div>
+      <div class="node"><div class="s">Stage A</div><div class="t">Text → speech</div><div class="m">ElevenLabs v3 or Fish Audio — switchable</div></div>
+      <div class="node"><div class="s">Stage B</div><div class="t">Frame the shot</div><div class="m">Per-aspect reference + face-aware crop</div></div>
+      <div class="node hot"><div class="s">Stage C · GPU</div><div class="t">Wan2.2-S2V</div><div class="m">Audio-driven video, 4-step distilled, on H100</div></div>
+      <div class="node"><div class="s">Mux</div><div class="t">Final MP4</div><div class="m">Full-quality audio muxed in</div></div>
+    </div>
+    <p class="async-note">Wan takes minutes, so generation is a job, not a blocking call:
+      <code>POST /generate</code> returns a <code>job_id</code> instantly → poll <code>/status</code>
+      → stream the finished MP4 from <code>/video</code>.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">The stack</p>
+  <h2>Models, and why each earned its slot</h2>
+  <p class="sub">Every model is commercial-use safe. The generator was chosen for quality first;
+    speed was bought back with distillation rather than by compromising the look.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Role</th><th>Model</th><th>Why this one</th></tr></thead>
+      <tbody>
+        <tr class="pick">
+          <td class="role">Avatar generation</td>
+          <td class="model">Wan2.2-S2V-14B<span class="chip pick">Chosen</span></td>
+          <td>Best full-generation quality — the whole head rendered coherently. Apache-2.0, safe everywhere.</td>
+        </tr>
+        <tr>
+          <td class="role">Speed</td>
+          <td class="model">Wan2.1-T2V-14B distill LoRA</td>
+          <td>4-step inference (vs 40). S2V shares the 2.1 dense backbone, so the LoRA drops straight in — same model, ~4× faster.</td>
+        </tr>
+        <tr>
+          <td class="role">Voice — A</td>
+          <td class="model">ElevenLabs v3 (IVC)</td>
+          <td>Expressive, tag-driven delivery from a clone of the host's own voice.</td>
+        </tr>
+        <tr>
+          <td class="role">Voice — B</td>
+          <td class="model">Fish Audio s2.1-pro</td>
+          <td>The A/B challenger — switchable per request to compare naturalness.</td>
+        </tr>
+        <tr>
+          <td class="role">Audio director</td>
+          <td class="model">Groq · gpt-oss-120b</td>
+          <td>Fast, cheap LLM that inserts emotion/pacing tags without changing a word of the script.</td>
+        </tr>
+        <tr>
+          <td class="role">Face &amp; frames</td>
+          <td class="model">InsightFace buffalo_l</td>
+          <td>Best-frame selection at onboarding + face-aware cropping for reels.</td>
+        </tr>
+        <tr>
+          <td class="role">Studio reference</td>
+          <td class="model">Gemini 2.5 Flash Image</td>
+          <td>Identity-preserving re-staging of one frame into a clean studio portrait.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Due diligence</p>
+  <h2>What we evaluated and rejected</h2>
+  <p class="sub">The interesting part isn't what we picked — it's what we ruled out, and why.</p>
+  <div class="rej">
+    <div class="rcard"><span class="verdict">Rejected · quality</span><h4>EchoMimicV2</h4><p class="why">The first attempt. Identity morphing and waxy faces — didn't clear the bar.</p></div>
+    <div class="rcard"><span class="verdict">Rejected · quality</span><h4>MuseTalk / LatentSync</h4><p class="why">Fast, but they only re-paint the mouth — a visible step down from full generation.</p></div>
+    <div class="rcard"><span class="verdict">Rejected · wrong tool</span><h4>daVinci-MagiHuman / LTX-Video</h4><p class="why">Fast, but they generate their <em>own</em> audio — can't speak the host's cloned voice.</p></div>
+    <div class="rcard"><span class="verdict">Rejected · license + speed</span><h4>HunyuanVideo-Avatar</h4><p class="why">Same heavy-model slowness as Wan, and its license excludes the EU / UK / South Korea — a blocker for a global product.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Approach</p>
+  <h2>The decisions that shaped it</h2>
+  <div class="dec">
+    <div class="dcard"><h4>Quality first, speed second</h4><p>Pick the best-looking model, then claw back speed with a distillation LoRA — never trade away the look.</p></div>
+    <div class="dcard"><h4>Decouple the slow part</h4><p>Video gen runs as an async job so the API stays instant; the client polls and streams the result.</p></div>
+    <div class="dcard"><h4>Reference Studio</h4><p>Users won't record perfect video — so we reimagine one good frame into a clean studio portrait. Any input works.</p></div>
+    <div class="dcard"><h4>Format-native output</h4><p>Per-aspect references + face-aware cropping give proper 9:16 reels, not a zoomed-in landscape crop.</p></div>
+    <div class="dcard"><h4>Provider-agnostic TTS</h4><p>ElevenLabs and Fish Audio behind one switch — A/B voices without touching the pipeline.</p></div>
+    <div class="dcard"><h4>Serverless, scale-to-zero</h4><p>GPU spins up on demand and back down to zero — you pay for seconds of render, not idle machines.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Infrastructure</p>
+  <h2>Runs entirely on Modal</h2>
+  <p class="sub">No servers to manage. One deploy wires up the GPU workers, web endpoints, storage and secrets.</p>
+  <div class="infra">
+    <span class="ichip"><b>H100</b> GPU · scale-to-zero</span>
+    <span class="ichip"><b>Volumes</b> — 49GB weights · host media · artifacts</span>
+    <span class="ichip"><b>modal.Dict</b> — profiles + job state</span>
+    <span class="ichip"><b>ASGI</b> web endpoints · proxy-auth</span>
+    <span class="ichip"><b>Secrets</b> via .env</span>
+    <span class="ichip"><b>ffmpeg</b> audio/video muxing</span>
+  </div>
+</section>
+
+<footer class="wrap">
+  EasyWebinar · AI Avatar pipeline — architecture overview. Numbers are current-build measurements
+  (480p, 4-step distilled, single H100).
+</footer>
+
+<script>
+  (function(){
+    var c=document.getElementById('wave'); if(!c) return;
+    var ctx=c.getContext('2d'), dpr=Math.min(window.devicePixelRatio||1,2), t=0;
+    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function accent(){return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#35d0bf';}
+    function size(){c.width=c.clientWidth*dpr;c.height=c.clientHeight*dpr;}
+    size(); window.addEventListener('resize',size);
+    function draw(){
+      var w=c.width,h=c.height; ctx.clearRect(0,0,w,h);
+      ctx.lineWidth=2*dpr; ctx.strokeStyle=accent(); ctx.globalAlpha=1;
+      ctx.beginPath();
+      for(var x=0;x<=w;x+=2*dpr){
+        var p=x/w;
+        // speech-like waveform: layered sines with an amplitude envelope
+        var env=0.35+0.65*Math.abs(Math.sin(p*3.14159));
+        var y=h/2 + env*(h*0.32)*(
+              Math.sin(p*22+t)*0.55 +
+              Math.sin(p*47-t*1.7)*0.28 +
+              Math.sin(p*9+t*0.6)*0.5);
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+      if(!reduce){t+=0.03; requestAnimationFrame(draw);}
+    }
+    draw();
+  })();
+</script>

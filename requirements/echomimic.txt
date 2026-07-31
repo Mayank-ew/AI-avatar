@@ -1,0 +1,21 @@
+# LEGACY — EchoMimicV2 era. Function A now runs Wan2.2-S2V-14B and its deps are installed
+# inline by `wan_image` in app.py. Kept for history; nothing reads this file.
+#
+# Image 2 — heavy GPU, Function A (canvas/pose prep + EchoMimicV2)
+# NOTE: torch/xformers are installed from the cu124 index in app.py (separate pip_install
+# call with index_url), NOT from this file. These are the second-layer deps.
+# Versions pinned verbatim from EchoMimicV2's requirements (docs/02 §3, docs/05 §1).
+diffusers==0.31.0
+transformers==4.46.3
+einops==0.8.0
+omegaconf==2.3.0
+opencv-python
+insightface
+onnxruntime-gpu==1.20.1
+numpy==1.26.4
+moviepy==1.0.3
+huggingface_hub==0.26.2
+accelerate==1.1.1
+imageio==2.36.0
+imageio-ffmpeg==0.5.1
+# facenet_pytorch==2.6.0 is installed with --no-deps in app.py (docs/05 §1).

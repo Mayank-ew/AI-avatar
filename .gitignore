@@ -1,0 +1,21 @@
+# Secrets — never commit real credentials
+.env
+
+# Video: ignore every .mp4, then allow back only the clips the repo needs.
+#   avatar 1.mp4              — sample generated output (demo)
+#   test_presenter_trimmed.mp4 — onboarding source clip used by trim.py / reencode.py
+#   helene_onboard.mp4        — onboarding source for the Helene demo host
+*.mp4
+!avatar 1.mp4
+!test_presenter_trimmed.mp4
+!helene_onboard.mp4
+
+# Generated / intermediate audio
+*.mp3
+*.wav
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

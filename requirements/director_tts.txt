@@ -1,0 +1,4 @@
+# Image 1 — thin CPU-only, Stage 0 (LLM Director) + Stage A (ElevenLabs TTS)
+openai
+requests
+psycopg2-binary   # profile lookup at the front of /generate (see docs/05 §0 POC note)

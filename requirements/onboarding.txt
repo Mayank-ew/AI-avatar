@@ -1,0 +1,5 @@
+# Image 0 — thin CPU-only, host onboarding (Stage -1)
+# ffmpeg is installed via apt in the Modal image (see app.py), not pip.
+requests
+python-multipart
+psycopg2-binary   # PostgresProfileStore client (POC storage, see docs/05 §0 POC note)

@@ -1,0 +1,13 @@
+# LEGACY — Function B (face restoration / compositing) was removed in the Wan migration;
+# Wan2.2-S2V does it in one GPU step. Kept for history; nothing reads this file.
+#
+# Image 3 — lighter GPU, Function B (face restore + temporal blend + composite + mux)
+# torch/torchvision are installed from the cu124 index in app.py (separate pip_install),
+# INDEPENDENT of Function A's env — no shared install, no diffusers stack here.
+opencv-python
+basicsr
+facexlib
+gfpgan
+numpy
+huggingface_hub
+scipy   # histogram matching / optical-flow helpers for the composite + temporal blend
