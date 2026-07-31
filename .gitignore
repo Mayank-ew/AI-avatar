@@ -1,21 +1,30 @@
 # Secrets — never commit real credentials
 .env
+.env.*
+!.env.example
 
-# Video: ignore every .mp4, then allow back only the clips the repo needs.
-#   avatar 1.mp4              — sample generated output (demo)
-#   test_presenter_trimmed.mp4 — onboarding source clip used by trim.py / reencode.py
-#   helene_onboard.mp4        — onboarding source for the Helene demo host
+# Media — generated outputs, source clips, reference images. Keep these LOCAL, not in git.
+# (Regenerate them via the pipeline / helper scripts; the repo ships code + docs only.)
 *.mp4
-!avatar 1.mp4
-!test_presenter_trimmed.mp4
-!helene_onboard.mp4
-
-# Generated / intermediate audio
+*.mov
+*.mkv
+*.webm
+*.avi
 *.mp3
 *.wav
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
 
 # Python
 __pycache__/
 *.pyc
 .venv/
 venv/
+*.egg-info/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

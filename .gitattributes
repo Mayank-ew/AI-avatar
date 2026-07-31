@@ -1,1 +1,1 @@
-test_presenter_trimmed.mp4 filter=lfs diff=lfs merge=lfs -text
+# No Git LFS / no line-ending overrides. Media is gitignored (see .gitignore), so nothing here.
